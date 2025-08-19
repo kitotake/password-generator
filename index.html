@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/style.css">
+  <title>Générateur de mot de passe</title>
+</head>
+<body>
+    <button class="open-info-btn" id="openInfoBtn" onclick="toggleInfoSection()">ℹ️</button>
+
+    <div class="container">
+        <h1>🔐 Générateur de mot de passe</h1>
+    
+        <div class="form-group">
+          <label for="baseWord">Mot de base :</label>
+          <input type="text" id="baseWord" placeholder="Entrez votre mot de base">
+        </div>
+    
+        <div class="form-group">
+          <label for="length">Longueur totale :</label>
+          <input type="number" id="length" value="12" min="4" max="64">
+        </div>
+    
+        <div class="form-group">
+          <label>Types de caractères à inclure :</label>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="lowercase" checked>
+              <label for="lowercase">Minuscules (a-z)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="uppercase" checked>
+              <label for="uppercase">Majuscules (A-Z)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="numbers" checked>
+              <label for="numbers">Chiffres (0-9)</label>
+            </div>
+            <div class="checkbox-item">
+              <input type="checkbox" id="symbols" checked>
+              <label for="symbols">Symboles (!@#$%)</label>
+            </div>
+          </div>
+        </div>
+    
+        <button class="generate-btn" id="generateBtn">Générer le mot de passe</button>
+    
+        <div class="result" id="result">
+          <div class="password-display" id="passwordDisplay"></div>
+          <div class="strength-indicator">
+            <div class="strength-bar">
+              <div class="strength-fill" id="strengthFill"></div>
+            </div>
+            <div class="strength-text" id="strengthText"></div>
+          </div>
+          <button class="copy-btn" id="copyBtn">📋 Copier</button>
+        </div>
+    
+        <div class="saved-section">
+          <h3>Mots de passe enregistrés :</h3>
+          <div class="saved-passwords" id="savedPasswords"></div>
+          <div style="display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+            <button class="clear-all-btn" id="clearAllBtn">Effacer tout</button>
+            <button class="clear-all-btn" onclick="exportPasswordData()" style="background: linear-gradient(135deg, #74b9ff, #0984e3);">📥 Exporter</button>
+            <input type="file" id="importFile" accept=".json" style="display: none;" onchange="importPasswordData(event)">
+            <button class="clear-all-btn" onclick="document.getElementById('importFile').click()" style="background: linear-gradient(135deg, #00b894, #00a085);">📤 Importer</button>
+          </div>
+        </div>
+    </div>
+
+    <div class="info-section" id="infoSection">
+        <h3>
+          🍪 Gestion des cookies
+          <button class="close-info-btn" onclick="toggleInfoSection()">×</button>
+        </h3>
+        
+        <div class="cookie-status" id="cookieStatus">
+          <span id="cookieStatusIcon">⚠️</span>
+          <span id="cookieStatusText">Vérification...</span>
+        </div>
+        
+        <ul class="info-list" id="cookieInfoList">
+          <li>
+            <span class="icon">💾</span>
+            <div>
+              <div class="title">Sauvegarde automatique</div>
+              <div class="description">Les mots de passe sont sauvegardés dans les cookies</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🔄</span>
+            <div>
+              <div class="title">Chargement automatique</div>
+              <div class="description">Récupération des mots de passe au démarrage</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">📅</span>
+            <div>
+              <div class="title">Expiration</div>
+              <div class="description">Cookies valides pendant 30 jours</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🔒</span>
+            <div>
+              <div class="title">Sécurité</div>
+              <div class="description">Encodage des données et vérification des cookies</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">🧹</span>
+            <div>
+              <div class="title">Limite automatique</div>
+              <div class="description">Maximum 10 mots de passe, nettoyage des anciens</div>
+            </div>
+          </li>
+          <li>
+            <span class="icon">📊</span>
+            <div>
+              <div class="title">Export/Import</div>
+              <div class="description">Sauvegarde et restauration en format JSON</div>
+            </div>
+          </li>
+        </ul>
+
+        <button class="toggle-info" onclick="toggleDetailedInfo()">
+          <span id="toggleInfoText">Afficher les détails techniques</span>
+        </button>
+
+        <div id="technicalDetails" style="display: none; margin-top: 15px;">
+          <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 16px;">🔧 Détails techniques :</h4>
+          <ul class="info-list">
+            <li>
+              <span class="icon">📏</span>
+              <div>
+                <div class="title">Taille des cookies</div>
+                <div class="description">Utilisation actuelle : <span id="cookieSize">0 octets</span> / 4096 octets</div>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🌍</span>
+              <div>
+                <div class="title">Compatibilité</div>
+                <div class="description">Compatible avec tous les navigateurs modernes</div>
+              </div>
+            </li>
+            <li>
+              <span class="icon">⚡</span>
+              <div>
+                <div class="title">Performance</div>
+                <div class="description">Accès rapide, pas de serveur requis</div>
+              </div>
+            </li>
+            <li>
+              <span class="icon">🛡️</span>
+              <div>
+                <div class="title">Confidentialité</div>
+                <div class="description">Données stockées localement, aucune transmission</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+    </div>
+    
+    <div id="confirmModal" class="modal">
+      <div class="modal-content">
+        <h3 id="modalTitle">Confirmation</h3>
+        <p id="modalMessage">Êtes-vous sûr ?</p>
+        <div class="modal-buttons">
+          <button class="modal-btn cancel" onclick="closeModal()">Annuler</button>
+          <button class="modal-btn confirm" id="confirmBtn">Confirmer</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./js/cookies.js"></script>
+    <script src="./js/script.js"></script>
+</body>
+</html>
