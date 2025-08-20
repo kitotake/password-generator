@@ -1,0 +1,17 @@
+# Logs et système
+.DS_Store
+Thumbs.db
+
+# Environnement / éditeurs
+.vscode/
+.idea/
+
+# Dépendances (si un jour tu ajoutes npm/yarn)
+node_modules/
+
+# Fichiers compilés Sass
+css/*.css.map
+
+# Fichiers compilés JavaScript
+  js/*.js.map
+
