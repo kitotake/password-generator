@@ -1,0 +1,154 @@
+
+// Transition Mixin
+@mixin transition($property: all, $duration: $transition-normal, $timing: ease) {
+    transition: $property $duration $timing;
+  }
+  
+  // Border Radius Mixin
+  @mixin border-radius($radius) {
+    border-radius: $radius;
+  }
+  
+  // Box Shadow Mixin
+  @mixin box-shadow($shadow...) {
+    box-shadow: $shadow;
+  }
+  
+  // Gradient Mixin
+  @mixin gradient($color1, $color2, $angle: 135deg) {
+    background: linear-gradient($angle, $color1, $color2);
+  }
+  
+  // Glassmorphism Effect
+  @mixin glassmorphism($blur: 10px, $opacity: 0.95) {
+    background: rgba(255, 255, 255, $opacity);
+    backdrop-filter: blur($blur);
+  }
+  
+  // Button Hover Effect
+  @mixin button-hover($translate: -2px, $shadow: null) {
+    &:hover {
+      transform: translateY($translate);
+      @if $shadow {
+        @include box-shadow($shadow);
+      }
+    }
+  }
+  
+  // Flexbox Center
+  @mixin flex-center($direction: row) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @if $direction != row {
+      flex-direction: $direction;
+    }
+  }
+  
+  // Flexbox Between
+  @mixin flex-between($direction: row) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    @if $direction != row {
+      flex-direction: $direction;
+    }
+  }
+  
+  // Absolute Positioning
+  @mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+    position: absolute;
+    @if $top { top: $top; }
+    @if $right { right: $right; }
+    @if $bottom { bottom: $bottom; }
+    @if $left { left: $left; }
+  }
+  
+  // Fixed Positioning
+  @mixin fixed($top: null, $right: null, $bottom: null, $left: null) {
+    position: fixed;
+    @if $top { top: $top; }
+    @if $right { right: $right; }
+    @if $bottom { bottom: $bottom; }
+    @if $left { left: $left; }
+  }
+  
+  // Input Focus State
+  @mixin input-focus($color: $primary-color, $shadow-opacity: 0.1) {
+    &:focus {
+      outline: none;
+      border-color: $color;
+      @include box-shadow(0 0 0 3px rgba($color, $shadow-opacity));
+    }
+  }
+  
+  // Grid Layout
+  @mixin grid($columns: 1fr, $gap: $spacing-lg) {
+    display: grid;
+    grid-template-columns: $columns;
+    gap: $gap;
+  }
+  
+  // Typography
+  @mixin font($size: $font-size-base, $weight: normal, $family: $main-font) {
+    font-family: $family;
+    font-size: $size;
+    font-weight: $weight;
+  }
+  
+  // Button Base
+  @mixin button-base($padding: 10px 15px, $radius: $radius-lg) {
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    padding: $padding;
+    @include border-radius($radius);
+    @include transition();
+  }
+  
+  // Scrollbar Styling
+  @mixin custom-scrollbar($width: 6px, $track-color: rgba(255, 255, 255, 0.1), $thumb-color: rgba(102, 126, 234, 0.3)) {
+    &::-webkit-scrollbar {
+      width: $width;
+  
+      &-track {
+        background: $track-color;
+        @include border-radius($radius-sm);
+      }
+  
+      &-thumb {
+        background: $thumb-color;
+        @include border-radius($radius-sm);
+  
+        &:hover {
+          background: rgba(102, 126, 234, 0.5);
+        }
+      }
+    }
+  }
+  
+  // Responsive Breakpoints
+  @mixin mobile {
+    @media (max-width: $mobile) {
+      @content;
+    }
+  }
+  
+  @mixin tablet {
+    @media (min-width: $mobile + 1px) and (max-width: $tablet) {
+      @content;
+    }
+  }
+  
+  @mixin desktop {
+    @media (min-width: $tablet + 1px) {
+      @content;
+    }
+  }
+  
+  // Notification Styles
+  @mixin notification-style($bg-color1, $bg-color2) {
+    @include gradient($bg-color1, $bg-color2);
+    color: white;
+    font-weight: 600;
+  }

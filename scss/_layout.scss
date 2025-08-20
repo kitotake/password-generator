@@ -1,0 +1,130 @@
+// =============================================================================
+// LAYOUT
+// =============================================================================
+
+// Notifications
+.notification {
+    @include fixed($top: $spacing-xl, $right: $spacing-xl);
+    padding: $spacing-lg $spacing-xl;
+    @include border-radius($radius-xl);
+    z-index: $z-notification;
+    transform: translateX(400px);
+    @include transition();
+  
+    &.show {
+      transform: translateX(0);
+    }
+  
+    &.success {
+      @include notification-style($success-color, $success-light);
+    }
+  
+    &.error {
+      @include notification-style($error-color, $error-dark);
+    }
+  
+    &.warning {
+      @include notification-style($warning-color, $warning-dark);
+    }
+  }
+  
+  // Modal
+  .modal {
+    display: none;
+    @include fixed($top: 0, $left: 0);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: $z-modal;
+  }
+  
+  .modal-content {
+    background-color: white;
+    margin: 15% auto;
+    padding: $spacing-3xl;
+    @include border-radius($radius-2xl);
+    width: 90%;
+    max-width: $modal-max-width;
+    text-align: center;
+    @include box-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+  }
+  
+  .modal-buttons {
+    margin-top: $spacing-xl;
+    @include flex-center();
+    gap: $spacing-lg;
+  }
+  
+  // Info Section
+  .info-section {
+    margin-top: -30%;
+    margin-left: 70%;
+    display: grid;
+    padding: $spacing-xl;
+    @include gradient($light-bg, $lighter-bg);
+    @include border-radius($radius-2xl);
+    border-left: 4px solid $primary-color;
+    flex-direction: column;
+    justify-items: center;
+  
+    @include custom-scrollbar();
+  
+    @include mobile {
+      width: calc(100% - #{$spacing-4xl});
+      right: $spacing-xl;
+      left: $spacing-xl;
+      transform: translateY(-50%) translateY(100vh);
+  
+      &.open {
+        transform: translateY(-50%) translateY(0);
+      }
+    }
+  }
+  
+  .info-list {
+    li {
+      @include flex-center();
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+      padding: $spacing-sm;
+      background: rgba(255, 255, 255, 0.7);
+      @include border-radius($radius-lg);
+      @include transition();
+  
+      &:hover {
+        background: rgba(255, 255, 255, 0.9);
+        transform: translateX(5px);
+      }
+    }
+  
+    .icon {
+      @include font($font-size-base);
+      width: 20px;
+      text-align: center;
+    }
+  
+    .title {
+      font-weight: 600;
+      color: $dark-text;
+    }
+  
+    .description {
+      color: $light-text;
+      @include font($font-size-sm);
+    }
+  }
+  
+  // Responsive adjustments
+  .open-info-btn {
+    @include mobile {
+      bottom: $spacing-xl;
+      right: $spacing-xl;
+      top: auto;
+      transform: none;
+  
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }

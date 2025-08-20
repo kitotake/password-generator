@@ -1,0 +1,134 @@
+// =============================================================================
+// ANIMATIONS
+// =============================================================================
+
+// Keyframes
+@keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+  }
+  
+  @keyframes shake {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(-5px);
+    }
+    75% {
+      transform: translateX(5px);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+      transform: translate3d(0, 0, 0);
+    }
+    40%, 43% {
+      transform: translate3d(0, -10px, 0);
+    }
+    70% {
+      transform: translate3d(0, -5px, 0);
+    }
+    90% {
+      transform: translate3d(0, -2px, 0);
+    }
+  }
+  
+  // Animation Classes
+  .animate {
+    &-fade-in {
+      animation: fadeIn $transition-slow ease-in-out;
+    }
+  
+    &-slide-in {
+      animation: slideIn $transition-slow ease-out;
+    }
+  
+    &-slide-in-right {
+      animation: slideInRight $transition-slow ease-out;
+    }
+  
+    &-slide-in-left {
+      animation: slideInLeft $transition-slow ease-out;
+    }
+  
+    &-pulse {
+      animation: pulse 2s infinite;
+    }
+  
+    &-shake {
+      animation: shake 0.5s ease-in-out;
+    }
+  
+    &-bounce {
+      animation: bounce 1s ease-in-out;
+    }
+  }
+  
+  // Hover Animations
+  .hover-animate {
+    @include transition(transform);
+  
+    &:hover {
+      transform: scale(1.05);
+    }
+  
+    &-lift:hover {
+      transform: translateY(-3px);
+    }
+  
+    &-rotate:hover {
+      transform: rotate(5deg);
+    }
+  
+    &-glow:hover {
+      @include box-shadow(0 0 20px rgba($primary-color, 0.5));
+    }
+  }

@@ -1,0 +1,51 @@
+// =============================================================================
+// BASE STYLES
+// =============================================================================
+
+// Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+// Body
+body {
+  @include font($font-size-base, normal, $main-font);
+  @include gradient($accent-color, $secondary-color);
+  min-height: 100vh;
+  @include flex-center(column);
+  padding: $spacing-xl;
+}
+
+// Typography
+h1 {
+  text-align: center;
+  color: $dark-text;
+  margin-bottom: $spacing-3xl;
+  font-size: $font-size-xl;
+}
+
+h3 {
+  color: $dark-text;
+  margin-bottom: $spacing-lg;
+  @include flex-center();
+  gap: $spacing-md;
+}
+
+// Links
+a {
+  color: $primary-color;
+  text-decoration: none;
+  @include transition(color);
+
+  &:hover {
+    color: $primary-dark;
+  }
+}
+
+// Lists
+ul, ol {
+  list-style: none;
+  padding: 0;
+}
