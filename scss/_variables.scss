@@ -1,96 +1,47 @@
-// =============================================================================
-// VARIABLES SCSS
-// =============================================================================
+// Couleurs
+$primary-gradient: linear-gradient(135deg, #d73527 0%, #f4a261 50%, #e76f51 100%);
+$primary-color: #e76f51;
+$primary-dark: #d73527;
+$secondary-color: #f4a261;
 
-// Colors - Primary Palette
-$primary-color: #3498db;
-$primary-dark: #2980b9;
-$primary-darker: #1c445f;
+$accent-blue: #74b9ff;
+$accent-blue-dark: #0984e3;
 
-// Colors - Secondary Palette
-$secondary-color: #CE6909;
-$accent-color: #a73e3e;
-
-// Colors - Status
-$success-color: #27ae60;
-$success-light: #2ecc71;
-$success-bg: #d4edda;
-$success-text: #155724;
-
+$success-color: #00b894;
+$success-dark: #00a085;
 $error-color: #e74c3c;
 $error-dark: #c0392b;
-$error-bg: #f8d7da;
-$error-text: #721c24;
+$warning-color: #f4a261;
 
-$warning-color: #f39c12;
-$warning-dark: #e67e22;
+$text-primary: #2c3e50;
+$text-secondary: #34495e;
+$text-muted: #5a6c7d;
 
-// Colors - Text
-$dark-text: #2c3e50;
-$medium-text: #34495e;
-$light-text: #5a6c7d;
-
-// Colors - UI Elements
+$white: #ffffff;
+$light-gray: #f8f9fa;
 $border-color: #e1e8ed;
-$light-bg: #f8f9fa;
-$lighter-bg: #e9ecef;
-$gray-color: #95a5a6;
 
-// Colors - Special
-$copy-btn-bg: #ff3300;
-$copy-btn-hover: #51ff00;
+// Tailles et espacement
+$container-max-width: 500px;
+$border-radius: 20px;
+$border-radius-small: 10px;
+$border-radius-medium: 15px;
 
-// Font Stacks
-$main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-$mono-font: 'Courier New', monospace;
+$padding-large: 40px;
+$padding-medium: 25px;
+$padding-small: 15px;
 
-// Font Sizes
-$font-size-xs: 12px;
-$font-size-sm: 14px;
-$font-size-base: 16px;
-$font-size-lg: 18px;
-$font-size-xl: 2.2em;
+// Transitions
+$transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$transition-slow: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-// Spacing
-$spacing-xs: 5px;
-$spacing-sm: 8px;
-$spacing-md: 10px;
-$spacing-lg: 15px;
-$spacing-xl: 20px;
-$spacing-2xl: 25px;
-$spacing-3xl: 30px;
-$spacing-4xl: 40px;
-
-// Border Radius
-$radius-sm: 3px;
-$radius-md: 5px;
-$radius-lg: 8px;
-$radius-xl: 10px;
-$radius-2xl: 15px;
-$radius-3xl: 20px;
-
-// Breakpoints
-$mobile: 768px;
-$tablet: 1024px;
-$desktop: 1200px;
+// Ombres
+$shadow-light: 0 4px 15px rgba(0, 0, 0, 0.1);
+$shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.15);
+$shadow-heavy: 0 20px 60px rgba(0, 0, 0, 0.15);
 
 // Z-index
 $z-notification: 1000;
+$z-info-section: 100;
+$z-open-btn: 99;
 $z-modal: 2000;
-
-// Transitions
-$transition-fast: 0.2s;
-$transition-normal: 0.3s;
-$transition-slow: 0.5s;
-
-// Box Shadows
-$shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-$shadow-md: 0 4px 10px rgba(0, 0, 0, 0.15);
-$shadow-lg: 0 6px 20px rgba(0, 0, 0, 0.15);
-$shadow-xl: 0 10px 20px rgba(52, 152, 219, 0.3);
-$shadow-2xl: 0 20px 40px rgba(0, 0, 0, 0.1);
-
-// Container Sizes
-$container-max-width: 500px;
-$modal-max-width: 400px;
-$saved-passwords-max-height: 200px;

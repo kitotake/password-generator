@@ -1,232 +1,142 @@
-// =============================================================================
-// COMPONENTS
-// =============================================================================
+@import 'variables';
+@import 'mixins';
 
-// Container
+// Container principal
 .container {
-    @include glassmorphism();
-    @include border-radius($radius-3xl);
-    padding: $spacing-4xl;
-    @include box-shadow($shadow-2xl);
-    max-width: $container-max-width;
-    width: 100%;
-  }
-  
-  // Form Elements
-  .form-group {
-    margin-bottom: $spacing-2xl;
-  }
+  background: rgba($white, 0.95);
+  border-radius: $border-radius;
+  padding: $padding-large;
+  box-shadow: $shadow-heavy;
+  @include glass-effect;
+  max-width: $container-max-width;
+  width: 100%;
+}
+
+// Titre principal
+h1 {
+  text-align: center;
+  color: $text-primary;
+  margin-bottom: 30px;
+  font-size: 2.2em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+// Groupes de formulaire
+.form-group {
+  margin-bottom: 25px;
   
   label {
     display: block;
-    margin-bottom: $spacing-sm;
-    color: $medium-text;
+    margin-bottom: 8px;
+    color: $text-secondary;
     font-weight: 600;
   }
+}
+
+// Inputs
+input[type="text"], 
+input[type="number"] {
+  width: 100%;
+  padding: $padding-small;
+  border: 2px solid $border-color;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: $transition-smooth;
+  background: rgba($white, 0.9);
   
-  input[type="text"], 
-  input[type="number"] {
+  @include input-focus;
+}
+
+// Groupe de checkboxes
+.checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: $transition-smooth;
+  background: rgba($white, 0.5);
+  @include hover-lift;
+  
+  &:hover {
+    background: rgba($primary-color, 0.1);
+  }
+  
+  input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: $primary-color;
+  }
+  
+  label {
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 500;
+  }
+}
+
+// Boutons
+.generate-btn {
+  width: 100%;
+  padding: 18px;
+  @include gradient-button($primary-color, $primary-dark);
+  border-radius: $border-radius-medium;
+  font-size: 18px;
+  margin-top: 20px;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
     width: 100%;
-    padding: 12px;
-    border: 2px solid $border-color;
-    @include border-radius($radius-xl);
-    @include font($font-size-base);
-    @include transition();
-    @include input-focus();
-  }
-  
-  // Checkbox Group
-  .checkbox-group {
-    @include grid(1fr 1fr, $spacing-lg);
-    margin-top: $spacing-md;
-  
-    @include mobile {
-      @include grid(1fr, $spacing-lg);
-    }
-  }
-  
-  .checkbox-item {
-    @include flex-center();
-    gap: $spacing-md;
-  
-    input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-  
-    label {
-      margin-bottom: 0;
-      cursor: pointer;
-      font-weight: normal;
-    }
-  }
-  
-  // Buttons
-  .generate-btn {
-    width: 100%;
-    padding: $spacing-lg;
-    @include gradient($primary-color, $primary-dark);
-    color: white;
-    @include font($font-size-lg, 600);
-    @include button-base($radius: $radius-xl);
-    margin-top: $spacing-xl;
-  
-    @include button-hover(-2px, $shadow-xl);
-  
-    &:active {
-      transform: translateY(0);
-    }
-  }
-  
-  .copy-btn {
-    background: $copy-btn-bg;
-    color: #000;
-    @include button-base(10px 18px, $radius-lg);
-  
-    &:hover {
-      background: $copy-btn-hover;
-      @include button-hover(-2px, 0 4px 10px rgba(255, 51, 0, 0.5));
-    }
-  }
-  
-  .delete-btn {
-    background: $error-color;
-    color: white;
-    @include button-base(4px 8px, $radius-sm);
-    @include font($font-size-xs);
-  
-    &:hover {
-      background: $error-dark;
-    }
-  }
-  
-  .clear-all-btn {
-    background: $error-color;
-    color: white;
-    @include button-base(8px 16px, $radius-md);
-    margin-top: $spacing-md;
-  
-    &:hover {
-      background: $error-dark;
-    }
-  }
-  
-  .toggle-info {
-    background: $primary-dark;
-    color: white;
-    @include button-base(8px 16px, $radius-md);
-    margin-top: $spacing-md;
-  
-    &:hover {
-      background: $primary-darker;
-    }
-  }
-  
-  // Modal Buttons
-  .modal-btn {
-    @include button-base(10px 20px, $radius-lg);
-  
-    &.confirm {
-      background: $error-color;
-      color: white;
-    }
-  
-    &.cancel {
-      background: $gray-color;
-      color: white;
-    }
-  
-    @include button-hover();
-  }
-  
-  // Result Section
-  .result {
-    margin-top: $spacing-2xl;
-    padding: $spacing-xl;
-    @include gradient(#fff00033, #ce690933);
-    backdrop-filter: blur(12px);
-    @include border-radius($radius-2xl);
-    border-left: 5px solid $secondary-color;
-    @include box-shadow($shadow-lg);
-    display: none;
-    @include transition();
-  
-    &.show {
-      display: block;
-      animation: slideIn $transition-slow ease;
-    }
-  }
-  
-  .password-display {
-    @include font($font-size-lg, bold, $mono-font);
-    color: #000000;
-    margin-bottom: $spacing-lg;
-    word-break: break-all;
-    padding: $spacing-md;
-    background: rgba(255, 255, 255, 0.05);
-    @include border-radius($radius-lg);
-    border: 1px solid #fff00066;
-  }
-  
-  // Saved Passwords
-  .saved-section {
-    margin-top: $spacing-3xl;
-  }
-  
-  .saved-passwords {
-    max-height: $saved-passwords-max-height;
-    overflow-y: auto;
-  }
-  
-  .password-item {
-    background: $light-bg;
-    padding: $spacing-md;
-    margin-bottom: $spacing-sm;
-    @include border-radius($radius-md);
-    @include font($font-size-sm, normal, $mono-font);
-    @include flex-between();
-  }
-  
-  // Cookie Status
-  .cookie-status {
-    @include flex-center();
-    gap: $spacing-xs;
-    padding: $spacing-xs $spacing-md;
-    @include border-radius(20px);
-    @include font($font-size-xs, 600);
-  
-    &.enabled {
-      background: $success-bg;
-      color: $success-text;
-    }
-  
-    &.disabled {
-      background: $error-bg;
-      color: $error-text;
-    }
-  }
-  
-  // Strength Indicator
-  .strength-indicator {
-    margin-top: $spacing-md;
-  }
-  
-  .strength-bar {
-    width: 100%;
-    height: 8px;
-    background: $border-color;
-    @include border-radius(4px);
-    overflow: hidden;
-  }
-  
-  .strength-fill {
     height: 100%;
-    @include transition();
-    @include border-radius(4px);
+    background: linear-gradient(90deg, transparent, rgba($white, 0.2), transparent);
+    transition: left 0.5s;
   }
   
-  .strength-text {
-    @include font($font-size-sm, 600);
-    margin-top: $spacing-xs;
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba($primary-color, 0.4);
+    
+    &::before {
+      left: 100%;
+    }
   }
+}
+
+.copy-btn {
+  @include gradient-button($secondary-color, $primary-color);
+  padding: 12px 20px;
+  box-shadow: 0 4px 15px rgba($secondary-color, 0.3);
+}
+
+.delete-btn {
+  @include gradient-button($error-color, $error-dark);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba($error-color, 0.4);
+  }
+}
+
+.clear-all-btn {
+  @include gradient-button($error-color, $error-dark);
+  padding: 10px 18px;
+  border-radius: 8px;
+  margin-top: 10px;
+  font-weight: 500;
+}

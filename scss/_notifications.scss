@@ -1,0 +1,80 @@
+@import 'variables';
+
+.notification {
+    position: fixed;
+    top: 30px;
+    right: 30px;
+    padding: 18px 25px;
+    border-radius: 12px;
+    color: $white;
+    font-weight: 600;
+    z-index: $z-notification;
+    transform: translateX(400px);
+    transition: $transition-slow;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    
+    &.show {
+      transform: translateX(0);
+    }
+    
+    &.success {
+      background: linear-gradient(135deg, $success-color, $success-dark);
+    }
+    
+    &.error {
+      background: linear-gradient(135deg, $error-color, $error-dark);
+    }
+    
+    &.warning {
+      background: linear-gradient(135deg, $warning-color, $primary-color);
+    }
+  }
+  
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: $z-modal;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+  }
+  
+  .modal-content {
+    background: linear-gradient(135deg, $white, $light-gray);
+    margin: 10% auto;
+    padding: 35px;
+    border-radius: $border-radius;
+    width: 90%;
+    max-width: 450px;
+    text-align: center;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba($white, 0.2);
+  }
+  
+  .modal-buttons {
+    margin-top: 25px;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+  
+  .modal-btn {
+    @include button-base;
+    padding: 12px 24px;
+    font-size: 16px;
+    
+    &.confirm {
+      @include gradient-button($error-color, $error-dark);
+    }
+    
+    &.cancel {
+      @include gradient-button($accent-blue, $accent-blue-dark);
+    }
+    
+    &:hover {
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+  }

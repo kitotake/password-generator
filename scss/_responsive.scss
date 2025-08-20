@@ -2,18 +2,30 @@
 @import './variables.scss' ;
 @import './mixins.scss'   ;
 
-@include responsive(md) {
-    .checkbox-group {
-      grid-template-columns: 1fr;
-    }
-    .info-section {
-      width: calc(100% - 40px);
-      right: 20px;  
-      left: 20px;
-      transform: translateY(-50%) translateY(100vh);
-    }
-    .info-section.open {
+@media (max-width: 768px) {
+  .info-section {
+    width: calc(100% - 40px);
+    right: 20px;
+    left: 20px;
+    transform: translateY(-50%) translateY(100vh);
+    
+    &.open {
       transform: translateY(-50%) translateY(0);
     }
   }
   
+  .open-info-btn {
+    bottom: 20px;
+    right: 20px;
+    top: auto;
+    transform: none;
+    
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  
+  .checkbox-group {
+    grid-template-columns: 1fr;
+  }
+}

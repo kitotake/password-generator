@@ -1,130 +1,237 @@
-// =============================================================================
-// LAYOUT
-// =============================================================================
+@import 'variables';
+@import 'mixins';
 
-// Notifications
-.notification {
-    @include fixed($top: $spacing-xl, $right: $spacing-xl);
-    padding: $spacing-lg $spacing-xl;
-    @include border-radius($radius-xl);
-    z-index: $z-notification;
-    transform: translateX(400px);
-    @include transition();
+
+// Résultats
+.result {
+  margin-top: 25px;
+  padding: $padding-medium;
+  background: linear-gradient(135deg, rgba($secondary-color, 0.2), rgba($primary-color, 0.1));
+  @include glass-effect;
+  border-radius: 18px;
+  border: 1px solid rgba($primary-color, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  display: none;
+  transition: $transition-slow;
   
-    &.show {
-      transform: translateX(0);
+  &.show {
+    display: block;
+    animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.password-display {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 18px;
+  font-weight: bold;
+  color: $text-primary;
+  margin-bottom: 20px;
+  word-break: break-all;
+  padding: $padding-small;
+  background: rgba($white, 0.8);
+  border-radius: 12px;
+  border: 2px solid rgba($primary-color, 0.2);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+// Section des mots de passe sauvegardés
+.saved-section {
+  margin-top: 35px;
+  
+  h3 {
+    color: $text-primary;
+    margin-bottom: 15px;
+  }
+}
+
+.saved-passwords {
+  max-height: 200px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: $primary-color #f1f1f1;
+  
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 4px;
+  }
+}
+
+.password-item {
+  background: rgba($white, 0.8);
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  font-family: 'Monaco', 'Menlo', monospace;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba($primary-color, 0.1);
+  transition: $transition-smooth;
+  
+  &:hover {
+    transform: translateX(5px);
+    box-shadow: $shadow-light;
+  }
+}
+
+// Section d'informations
+.info-section {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%) translateX(100%);
+  width: 320px;
+  max-height: 80vh;
+  padding: $padding-medium;
+  background: linear-gradient(135deg, rgba($white, 0.95), rgba($light-gray, 0.95));
+  border-radius: $border-radius;
+  border: 1px solid rgba($primary-color, 0.2);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(20px);
+  transition: $transition-slow;
+  z-index: $z-info-section;
+  overflow-y: auto;
+  
+  &.open {
+    transform: translateY(-50%) translateX(0);
+  }
+  
+  h3 {
+    color: $text-primary;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 18px;
+  }
+  
+  // Scrollbar personnalisée
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba($white, 0.1);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba($primary-color, 0.3);
+    border-radius: 3px;
+    
+    &:hover {
+      background: rgba($primary-color, 0.5);
     }
+  }
+}
+
+// Boutons d'information
+.close-info-btn {
+  @include gradient-button($error-color, $error-dark);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba($error-color, 0.3);
   
-    &.success {
-      @include notification-style($success-color, $success-light);
-    }
+  &:hover {
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 6px 20px rgba($error-color, 0.4);
+  }
+}
+
+.open-info-btn {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  @include gradient-button($primary-color, $primary-dark);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  z-index: $z-open-btn;
+  box-shadow: 0 8px 25px rgba($primary-color, 0.4);
   
-    &.error {
-      @include notification-style($error-color, $error-dark);
-    }
+  &:hover {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 12px 35px rgba($primary-color, 0.5);
+  }
   
-    &.warning {
-      @include notification-style($warning-color, $warning-dark);
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.info-list {
+  list-style: none;
+  padding: 0;
+  
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding: 12px;
+    background: rgba($white, 0.8);
+    border-radius: 12px;
+    transition: $transition-smooth;
+    border: 1px solid rgba($primary-color, 0.1);
+    
+    &:hover {
+      background: rgba($white, 0.95);
+      transform: translateX(5px);
+      box-shadow: $shadow-light;
     }
   }
   
-  // Modal
-  .modal {
-    display: none;
-    @include fixed($top: 0, $left: 0);
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    z-index: $z-modal;
-  }
-  
-  .modal-content {
-    background-color: white;
-    margin: 15% auto;
-    padding: $spacing-3xl;
-    @include border-radius($radius-2xl);
-    width: 90%;
-    max-width: $modal-max-width;
+  .icon {
+    font-size: 18px;
+    width: 24px;
     text-align: center;
-    @include box-shadow(0 20px 40px rgba(0, 0, 0, 0.2));
+    flex-shrink: 0;
   }
   
-  .modal-buttons {
-    margin-top: $spacing-xl;
-    @include flex-center();
-    gap: $spacing-lg;
+  .title {
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: 4px;
   }
   
-  // Info Section
-  .info-section {
-    margin-top: -30%;
-    margin-left: 70%;
-    display: grid;
-    padding: $spacing-xl;
-    @include gradient($light-bg, $lighter-bg);
-    @include border-radius($radius-2xl);
-    border-left: 4px solid $primary-color;
-    flex-direction: column;
-    justify-items: center;
-  
-    @include custom-scrollbar();
-  
-    @include mobile {
-      width: calc(100% - #{$spacing-4xl});
-      right: $spacing-xl;
-      left: $spacing-xl;
-      transform: translateY(-50%) translateY(100vh);
-  
-      &.open {
-        transform: translateY(-50%) translateY(0);
-      }
-    }
+  .description {
+    color: $text-muted;
+    font-size: 13px;
+    line-height: 1.4;
   }
+}
+
+.toggle-info {
+  @include gradient-button($accent-blue, $accent-blue-dark);
+  padding: 10px 18px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-weight: 500;
+  width: 100%;
   
-  .info-list {
-    li {
-      @include flex-center();
-      gap: $spacing-md;
-      margin-bottom: $spacing-md;
-      padding: $spacing-sm;
-      background: rgba(255, 255, 255, 0.7);
-      @include border-radius($radius-lg);
-      @include transition();
-  
-      &:hover {
-        background: rgba(255, 255, 255, 0.9);
-        transform: translateX(5px);
-      }
-    }
-  
-    .icon {
-      @include font($font-size-base);
-      width: 20px;
-      text-align: center;
-    }
-  
-    .title {
-      font-weight: 600;
-      color: $dark-text;
-    }
-  
-    .description {
-      color: $light-text;
-      @include font($font-size-sm);
-    }
+  &:hover {
+    box-shadow: 0 6px 20px rgba($accent-blue, 0.4);
   }
-  
-  // Responsive adjustments
-  .open-info-btn {
-    @include mobile {
-      bottom: $spacing-xl;
-      right: $spacing-xl;
-      top: auto;
-      transform: none;
-  
-      &:hover {
-        transform: scale(1.1);
-      }
-    }
-  }
+}

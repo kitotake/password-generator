@@ -4,12 +4,12 @@
   "description": "SCSS styles for password generator application",
   "main": "main.scss",
   "scripts": {
-    "build": "sass main.scss dist/style.css --style=compressed",
-    "dev": "sass main.scss dist/style.css --watch --style=expanded",
-    "build-dev": "sass main.scss dist/style.css --style=expanded --source-map",
-    "lint": "stylelint \"**/*.scss\"",
-    "format": "prettier --write \"**/*.scss\""
-  },
+  "build": "sass scss/main.scss css/style.css --style=compressed",
+  "dev": "sass scss/main.scss css/style.css --watch --style=expanded",
+  "build-dev": "sass scss/main.scss css/style.css --style=expanded --source-map",
+  "lint": "stylelint \"**/*.scss\"",
+  "format": "prettier --write \"**/*.scss\""
+},
   "dependencies": {
     "scss": "^0.2.4"
   },
