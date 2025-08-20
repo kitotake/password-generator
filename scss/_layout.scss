@@ -1,8 +1,6 @@
 @import 'variables';
 @import 'mixins';
 
-
-// Résultats
 .result {
   margin-top: 25px;
   padding: $padding-medium;
@@ -34,7 +32,6 @@
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-// Section des mots de passe sauvegardés
 .saved-section {
   margin-top: 35px;
   
@@ -46,8 +43,9 @@
 
 .saved-passwords {
   max-height: 200px;
-  overflow-y: auto;
-  scrollbar-width: thin;
+  overflow-y: scroll;
+
+  scrollbar-width: none;
   scrollbar-color: $primary-color #f1f1f1;
   
   &::-webkit-scrollbar {
@@ -84,14 +82,19 @@
   }
 }
 
-// Section d'informations
 .info-section {
+  display: none;
+  overflow-y: scroll;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-color: #d17c06 rgb(209 116 10 / 5%);
+  scrollbar-width: none;
   position: fixed;
   top: 50%;
-  right: 20px;
+  margin-right: -25%;
   transform: translateY(-50%) translateX(100%);
-  width: 320px;
-  max-height: 80vh;
+  width: 400px;
+  flex-direction: column;
   padding: $padding-medium;
   background: linear-gradient(135deg, rgba($white, 0.95), rgba($light-gray, 0.95));
   border-radius: $border-radius;
@@ -100,7 +103,7 @@
   backdrop-filter: blur(20px);
   transition: $transition-slow;
   z-index: $z-info-section;
-  overflow-y: auto;
+ 
   
   &.open {
     transform: translateY(-50%) translateX(0);
@@ -115,7 +118,6 @@
     font-size: 18px;
   }
   
-  // Scrollbar personnalisée
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -135,7 +137,7 @@
   }
 }
 
-// Boutons d'information
+
 .close-info-btn {
   @include gradient-button($error-color, $error-dark);
   width: 30px;
@@ -156,8 +158,8 @@
 
 .open-info-btn {
   position: fixed;
-  top: 50%;
-  right: 20px;
+  margin-top: -45%;
+   right: 20px;
   transform: translateY(-50%);
   @include gradient-button($primary-color, $primary-dark);
   width: 50px;

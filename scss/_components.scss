@@ -1,7 +1,6 @@
 @import 'variables';
 @import 'mixins';
 
-// Container principal
 .container {
   background: rgba($white, 0.95);
   border-radius: $border-radius;
@@ -12,7 +11,6 @@
   width: 100%;
 }
 
-// Titre principal
 h1 {
   text-align: center;
   color: $text-primary;
@@ -21,7 +19,6 @@ h1 {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-// Groupes de formulaire
 .form-group {
   margin-bottom: 25px;
   
@@ -33,7 +30,6 @@ h1 {
   }
 }
 
-// Inputs
 input[type="text"], 
 input[type="number"] {
   width: 100%;
@@ -47,7 +43,6 @@ input[type="number"] {
   @include input-focus;
 }
 
-// Groupe de checkboxes
 .checkbox-group {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -83,7 +78,6 @@ input[type="number"] {
   }
 }
 
-// Boutons
 .generate-btn {
   width: 100%;
   padding: 18px;

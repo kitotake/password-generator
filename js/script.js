@@ -1,6 +1,6 @@
 let savedPasswords = [];
 
-function toggleDetailedInfo() {
+function toggleDetailedInfo() { // Afficher / masquer uniquement les détails techniques
   const details = document.getElementById('technicalDetails');
   const toggleText = document.getElementById('toggleInfoText');
   
@@ -13,6 +13,17 @@ function toggleDetailedInfo() {
     toggleText.textContent = 'Afficher les détails techniques';
   }
 }
+
+function toggleInfoSection() { // Ouvrir / fermer le bloc complet "Gestion des cookies"
+  const infoSection = document.getElementById('infoSection');
+  
+  if (infoSection.style.display === 'none' || infoSection.style.display === '') {
+    infoSection.style.display = 'block';
+  } else {
+    infoSection.style.display = 'none';
+  }
+}
+
 
 function updateCookieSize() {
   const size = getCookieSize();
